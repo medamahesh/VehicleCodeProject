@@ -3,17 +3,22 @@ package com.code.vehicle.model;
 import java.util.Date;
 
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @NamedQuery(name = "Vehicle.findByVehicleType",
 query = "select u from Vehicle u where u.type = ?1")
 @Table(name = "vehicle", catalog = "test")
+@DiscriminatorColumn(name = "type")
 public class Vehicle {
 
 	
