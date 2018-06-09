@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.code.vehicle.model.Truck;
 import com.code.vehicle.model.Vehicle;
 import com.code.vehicle.repository.VehicleRepository;
 
@@ -32,6 +33,13 @@ public class VehicleResource {
     public Vehicle save(@RequestBody Vehicle vehicle) {
     	   Date now = new Date();
     	   vehicle.setCreatedDate(now);
+    	   
+    	   if(vehicle.getName().equalsIgnoreCase("Truck")){
+    		   
+    		   Vehicle v = new Truck();
+    		   v.setCreatedDate(now);
+    	   }
+    	   
         return vehicleRepository.save(vehicle);
     }
     
