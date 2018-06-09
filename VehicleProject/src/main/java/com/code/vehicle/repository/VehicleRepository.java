@@ -1,13 +1,10 @@
 package com.code.vehicle.repository;
 
-import java.util.List;
-
-import org.springframework.data.repository.CrudRepository;
+import javax.transaction.Transactional;
 
 import com.code.vehicle.model.Vehicle;
 
-public interface VehicleRepository extends CrudRepository<Vehicle, Integer> {
-    
-    List<Vehicle> findByVehicleType(String type);
+@Transactional
+public interface VehicleRepository extends VehicleBaseRepository<Vehicle>{
 
 }

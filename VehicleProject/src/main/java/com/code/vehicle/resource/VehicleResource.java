@@ -1,7 +1,6 @@
 package com.code.vehicle.resource;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,35 +11,65 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.code.vehicle.model.Boat;
+import com.code.vehicle.model.Car;
+import com.code.vehicle.model.Drone;
 import com.code.vehicle.model.Truck;
 import com.code.vehicle.model.Vehicle;
+import com.code.vehicle.repository.BoatRepository;
+import com.code.vehicle.repository.CarRepository;
+import com.code.vehicle.repository.DroneRepository;
+import com.code.vehicle.repository.TruckRepository;
 import com.code.vehicle.repository.VehicleRepository;
 
 @RestController
-@RequestMapping("/rest/users")
+@RequestMapping("/rest/vehicle")
 public class VehicleResource {
 
     
     @Autowired
     VehicleRepository vehicleRepository;
+    @Autowired
+    CarRepository carRepository;
+    @Autowired
+    TruckRepository truckRepository;
+    @Autowired
+    DroneRepository droneRepository;
+    @Autowired
+    BoatRepository boatRepository;
 
     @GetMapping("/allVehicles")
     public Iterable<Vehicle> getAll() {
         return vehicleRepository.findAll();
     }
 
-    @PostMapping("/saveVehicle")
-    public Vehicle save(@RequestBody Vehicle vehicle) {
+    @PostMapping("/saveCar")
+    public Car saveCar(@RequestBody Car car) {
     	   Date now = new Date();
-    	   vehicle.setCreatedDate(now);
+    	   //car.setCreatedDate(now);
+    		   return carRepository.save(car);
     	   
-    	   if(vehicle.getName().equalsIgnoreCase("Truck")){
-    		   
-    		   Vehicle v = new Truck();
-    		   v.setCreatedDate(now);
-    	   }
+    }
+    @PostMapping("/saveTruck")
+    public Truck saveTruck(@RequestBody Truck truck) {
+    	   Date now = new Date();
+    	   //car.setCreatedDate(now);
+    		   return truckRepository.save(truck);
     	   
-        return vehicleRepository.save(vehicle);
+    }
+    @PostMapping("/saveBoat")
+    public Boat saveBoat(@RequestBody Boat boat) {
+    	   Date now = new Date();
+    	   //car.setCreatedDate(now);
+    		   return boatRepository.save(boat);
+    	   
+    }
+    @PostMapping("/saveDrone")
+    public Drone saveDrone(@RequestBody Drone drone) {
+    	   Date now = new Date();
+    	   //car.setCreatedDate(now);
+    		   return droneRepository.save(drone);
+    	   
     }
     
     @GetMapping("/update/{id}/{name}")
@@ -60,12 +89,12 @@ public class VehicleResource {
     	return "Vehicle Deleted";
     }
     
-    @GetMapping("/{name}")
+   /* @GetMapping("/{name}")
     public List<Vehicle> getVehicle(@PathVariable("name") final String name) {
         return vehicleRepository.findByVehicleType(name);
 
     }
-
+*/
     @GetMapping("/id/{id}")
     public Vehicle getId(@PathVariable("id") final Integer id) {
         return vehicleRepository.findOne(id);

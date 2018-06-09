@@ -15,10 +15,11 @@ import javax.persistence.Table;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-@NamedQuery(name = "Vehicle.findByVehicleType",
-query = "select u from Vehicle u where u.type = ?1")
-@Table(name = "vehicle", catalog = "test")
 @DiscriminatorColumn(name = "type")
+/*@NamedQuery(name = "Vehicle.findByVehicleType",
+query = "select u from Vehicle u where u.type = ?1")*/
+@Table(name = "vehicle", catalog = "test")
+
 public class Vehicle {
 
 	
@@ -26,22 +27,13 @@ public class Vehicle {
     @Column(name = "id")
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-    @Column(name = "type")
-    private String type;
-    
+ 
     @Column(name = "name")
     private String name;
     
    // @Temporal(TemporalType.DATE)
     private Date createdDate;
 
-    public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
 
 	public String getName() {
 		return name;
