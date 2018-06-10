@@ -16,8 +16,7 @@ import javax.persistence.Table;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "type")
-/*@NamedQuery(name = "Vehicle.findByVehicleType",
-query = "select u from Vehicle u where u.type = ?1")*/
+/*@NamedQuery(name = "Vehicle.deleteVehicle", query = "DELETE FROM Vehicle WHERE  ROWNUM() < 2 order by createdDate desc")*/
 @Table(name = "vehicle", catalog = "test")
 
 public class Vehicle {

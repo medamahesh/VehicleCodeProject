@@ -38,6 +38,7 @@ public class VehicleResource {
     @Autowired
     BoatRepository boatRepository;
 
+    Date now = new Date();
     @GetMapping("/allVehicles")
     public Iterable<Vehicle> getAll() {
         return vehicleRepository.findAll();
@@ -45,29 +46,28 @@ public class VehicleResource {
 
     @PostMapping("/saveCar")
     public Car saveCar(@RequestBody Car car) {
-    	   Date now = new Date();
-    	   //car.setCreatedDate(now);
+    	   car.setCreatedDate(now);
     		   return carRepository.save(car);
     	   
     }
     @PostMapping("/saveTruck")
     public Truck saveTruck(@RequestBody Truck truck) {
-    	   Date now = new Date();
-    	   //car.setCreatedDate(now);
+    	  
+    	   truck.setCreatedDate(now);
     		   return truckRepository.save(truck);
     	   
     }
     @PostMapping("/saveBoat")
     public Boat saveBoat(@RequestBody Boat boat) {
     	   Date now = new Date();
-    	   //car.setCreatedDate(now);
+    	   boat.setCreatedDate(now);
     		   return boatRepository.save(boat);
     	   
     }
     @PostMapping("/saveDrone")
     public Drone saveDrone(@RequestBody Drone drone) {
     	   Date now = new Date();
-    	   //car.setCreatedDate(now);
+    	   drone.setCreatedDate(now);
     		   return droneRepository.save(drone);
     	   
     }
@@ -83,18 +83,13 @@ public class VehicleResource {
         return vehicleRepository.save(vehicle);
     }
     
-    @DeleteMapping("/deleteVehicle/{id}")
-    public String delete(@PathVariable("id") final int id){
-    	vehicleRepository.delete(id);
-    	return "Vehicle Deleted";
+    @DeleteMapping("/deleteVehicle")
+    public String delete(){
+    	vehicleRepository.deleteVehicle();
+    	return "Vehicles Deleted";
     }
     
-   /* @GetMapping("/{name}")
-    public List<Vehicle> getVehicle(@PathVariable("name") final String name) {
-        return vehicleRepository.findByVehicleType(name);
 
-    }
-*/
     @GetMapping("/id/{id}")
     public Vehicle getId(@PathVariable("id") final Integer id) {
         return vehicleRepository.findOne(id);
